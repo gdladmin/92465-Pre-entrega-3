@@ -1,3 +1,10 @@
+--------- segundo commit entrega 3 ---------------------------------
+Problema: En el turno del jugador, cuando pide carta, el código sumaba el valor a puntosJugador pero no no le avisaba por pantalla qué carta le había tocado, a menos que se pasara de 21. En la siguiente vuelta del bucle while, te mostraba directo el puntaje acumulado sin el contexto de la jugada anterior.
+
+Solucion: Si pides una carta y te mantienes por debajo o igual a 21, se dispara un alert inmediato y 
+se quita la variable mensajeTurno que estaba fuera del bucle con el mensaje no actualizado.
+
+---------primer commit entrega 3------------------------------------
 Simulador de BlackJack (Pre-entrega 3) 
 Se modifica el juego de la pre-entrega-2 encapsulando todo en funciones
 1. funcion flecha, generaCarta

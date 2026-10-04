@@ -41,7 +41,6 @@ function iniciarJuegoBlackjack() {
   // INICIO: Se reparten dos cartas al jugador y al dealer (del 1 al 10)
   // *****************************************************************************************
 
-
     let jugadorCarta1 = generarCarta();
     let jugadorCarta2 = generarCarta();
     let puntosJugador = jugadorCarta1 + jugadorCarta2;
@@ -57,34 +56,40 @@ function iniciarJuegoBlackjack() {
     "Tus cartas: " + puntosJugador + " (" + jugadorCarta1 + " y " + jugadorCarta2 + ")\n" +
     "Primera carta del Dealer: " + dealerCarta1
   );
+
   // *****************************************************************************************
   // INICIA TURNO JUGADOR 
   // ***************************************************************************************** 
     let turnoJugador = true;
-     let mensajeTurno = "Tus puntos actuales: " + puntosJugador;
+    // Segundo commit
+    // Se quita este mensaje , que esta fuera del bucle mal inicializado 
+    // let mensajeTurno = "Tus puntos actuales: " + puntosJugador;
     let mensajeResultado = ""; 
 
     while (turnoJugador && puntosJugador < 21) {
       let pedirCarta = window.confirm(
-      mensajeTurno +
-      "\n\n¿Quieres otra carta?\n• Pulsa 'Aceptar' para PEDIR.\n• Pulsa 'Cancelar' para PLANTARSE."
-    );
-
+        "Tus puntos actuales: " + puntosJugador +
+        "\n\n¿Quieres otra carta?\n• Pulsa 'Aceptar' para PEDIR.\n• Pulsa 'Cancelar' para PLANTARSE."
+      );
 
       if (pedirCarta) {
         let nuevaCarta = generarCarta();
         puntosJugador = puntosJugador + nuevaCarta;
 
         if (puntosJugador > 21) {
-          saldo  = saldo - apuesta; 
+          saldo = saldo - apuesta; 
           mensajeResultado = "Te salió un " + nuevaCarta + ".\nTe pasaste de 21 !!! Perdiste esta mano.\nPerdiste: $" + apuesta;
           alert(mensajeResultado);
           turnoJugador = false;
-  }
+        } else {
+          //  arreglo 2DO COMMIT: Avisamos qué carta salió y el nuevo total antes de volver a preguntar
+          alert("Te salió un " + nuevaCarta + ".\nTus puntos actuales son: " + puntosJugador);
+        }
       } else { 
         turnoJugador = false;
       }
     }
+
  // *****************************************************************************************
   // INICIA TURNO DEALER  
   // ***************************************************************************************** 
@@ -102,23 +107,24 @@ function iniciarJuegoBlackjack() {
           ". Puntos actuales del dealer: " +
           puntosDealer);
       }
-// *****************************************************************************************
+
+  // *****************************************************************************************
   // SE DETERMINA EL GANADOR   
   // ***************************************************************************************** 
      
-  if (puntosDealer > 21) {
-      saldo += apuesta;
-      mensajeResultado = "La banca se pasa, !!!!! GANASTE !!!! \nGanaste: $" + apuesta;
-    } else if (puntosJugador > puntosDealer) {
-      saldo += apuesta;
-      mensajeResultado = "!!! Ganaste la mano!!! \nGanaste: $" + apuesta;
-    } else if (puntosJugador < puntosDealer) {
-      saldo -= apuesta;
-      mensajeResultado = "Perdiste esta mano.\nPerdiste: $" + apuesta;
-    } else {
-      mensajeResultado = " **** EMPATE ***** Recuperas tu apuesta.";
+      if (puntosDealer > 21) {
+        saldo += apuesta;
+        mensajeResultado = "La banca se pasa, !!!!! GANASTE !!!! \nGanaste: $" + apuesta;
+      } else if (puntosJugador > puntosDealer) {
+        saldo += apuesta;
+        mensajeResultado = "!!! Ganaste la mano!!! \nGanaste: $" + apuesta;
+      } else if (puntosJugador < puntosDealer) {
+        saldo -= apuesta;
+        mensajeResultado = "Perdiste esta mano.\nPerdiste: $" + apuesta;
+      } else {
+        mensajeResultado = " **** EMPATE ***** Recuperas tu apuesta.";
+      }
     }
-  }
 
     mostrarResumenPartida(mensajeResultado, puntosJugador, puntosDealer, saldo);
 
@@ -132,8 +138,7 @@ function iniciarJuegoBlackjack() {
   alert("¡Gracias por jugar al Blackjack! Tu saldo final fue de: $" + saldo);
 }
 
-// *****************************************************************
+// *************************************************----------------
 //  LLAMADA A LA FUNCION PRINCIPAL 
 // *****************************************************************
-// 
 iniciarJuegoBlackjack();
